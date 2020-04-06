@@ -32,27 +32,42 @@ def get_list_of_filenames(game_id):
 
 	return filenames
 
-def create_csv_summary(game_id, filenames = None):
+def create_csv_summary(game_id, filenames = None, detailed = False):
 
-	username_list = []
-	rating_list = []
+    username_list = []
+    rating_list = []
+    
+    # the following is for detailed view only
+    own_list = []
+    country_list = []
 
-	if filenames == None:
-		filenames = get_list_of_filenames(game_id)
+    if filenames == None:
+        filenames = get_list_of_filenames(game_id)
 
-	for filename in filenames:
-	    with open('./json_data/game_' + game_id + '/' + filename) as json_file:
-	        data = json.load(json_file)
-	        if not(is_empty_page_json(data)):
-		        for usernum, user_dict in enumerate(data['items']):
-		        	if not(type(user_dict['user']) == type(None)):
-		        		username = clean_username(user_dict['user']['username'])
-			        	username_list.append(username)
-			        	rating_list.append(user_dict['rating'])
-	            
-	with open('./json_data/game_' + game_id + '/' + game_id + '_summary.csv', 'w') as f:
-	    writer = csv.writer(f)
-	    writer.writerows(zip(username_list, rating_list))
+    for filename in filenames:
+        with open('./json_data/game_' + game_id + '/' + filename) as json_file:
+            data = json.load(json_file)
+            if not(is_empty_page_json(data)):
+                for usernum, user_dict in enumerate(data['items']):
+                    if not(type(user_dict['user']) == type(None)):
+                        username = clean_username(user_dict['user']['username'])
+                        username_list.append(username)
+                        rating_list.append(user_dict['rating'])
+                        if detailed:
+                            if 'own' in user_dict['status'].keys():
+                                own_list.append(user_dict['status']['own'])
+                            else:
+                                own_list.append(False)
+                            country_list.append(user_dict['user']['country'])
+
+    if detailed:
+        with open('./json_data/game_' + game_id + '/' + game_id + '_summary_detailed.csv', 'w') as f:
+            writer = csv.writer(f)
+            writer.writerows(zip(username_list, rating_list, own_list, country_list))
+    else:
+        with open('./json_data/game_' + game_id + '/' + game_id + '_summary.csv', 'w') as f:
+            writer = csv.writer(f)
+            writer.writerows(zip(username_list, rating_list))
 
 def clean_username(name):
 	"""
