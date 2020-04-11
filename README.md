@@ -1,7 +1,7 @@
 # Boardgame Recommendation System
 
 ## Introduction
-In this project, I collect all the user ratings from [BoardgameGeek](boardgamegeek.com)'s top 100 games, and fit a colaborative-filtering recommendation system on it. 
+In this project, I collect all the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games, and fit a colaborative-filtering recommendation system on it. 
 
 ## Data
 I obtained tha data using a combination of web scraping with `BeautifulSoup` and `API` requests. For each game, I collected all the ratings where the user actually rated the game (as opposed to entries where they just mark the game as owned, or put in a text comment) as of March 31, 2020. Please note that it can take up to an hour to gather information of a game, depending on the number of ratings. 
