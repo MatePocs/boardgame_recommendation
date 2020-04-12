@@ -5,6 +5,26 @@ import numpy as np
 # SIMILARITY METRIC FUNCTIONS
 
 def return_top_similar_dataframe(similarity_matrix, raw_ids, top_x):
+    """
+    Takes a similarity matrix, where each element is the distance between 
+    two items. For each item, returns the top_x similar items, sorted. 
+
+    Parameters:
+    ----------
+    similarity_matrix: a pandas DataFrame with distances
+
+    raw_ids: ids to use in the result
+
+    top_x: an integer, defines how many similar games we want to be listed
+        for each game
+
+
+    Returns:
+    --------
+    similarity_df: a pandas DataFrame, with top_x + 1 columns, first column
+        is called 'game', which is a list of games, and then we have similar_1, 
+        similar_2, ..., similar_x columns, with the names of the closest games
+    """
 
     length = similarity_matrix.shape[0]
 
