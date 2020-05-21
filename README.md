@@ -4,7 +4,7 @@
 In this project, I collect the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games, and train a colaborative-filtering recommendation system on it. The user enters a few games with their ratings, and the model returns a list of games the user would probably rate high. 
 
 ## Keywords
-BeatifulSoup, Web Scraping, API requests, JSON, Collaborative-Filtering Recommender Systems, Memory-Based Recommenders, Model-Based Recommenders, Scikit-Surprise, 
+BeatifulSoup, Web Scraping, API requests, JSON, Collaborative-Filtering Recommender Systems, Memory-Based Recommenders, Model-Based Recommenders, Scikit-Surprise, RMSE Score, K-Nearest Neighbour, KNNBasic, KNNWithMeans, KNNWithZScore Cosine Distance, Pearson Distance, Singular Value Decomposition, Matrix Factorisation, SVD++ model, Alternating Least Squares, GridSearchCV, Google Cloud Platform
 
 ## Links
 I published a series of articles on the topic in Towards Data Science, see the links below: 
@@ -32,16 +32,34 @@ A large portion of the users rated only one game, and there are users who rated 
 
 ![chart showing number of users per total number of ratings](./charts/users_by_number_of_ratings.png)
 
-## Metric
-Using the Root Mean Squared Error, `rmse`, score to compare the different models. 
+## Modelling
 
-## Recommender Methodology
-- `kNN` types: `kNNBaseline`, `kNNMeans`, `kNNZScore`
-- matrix factorization: `SVD`, `SVDpp`
-- combination of the two: `kNNBaseline`
-- misc. models: `SlopeOne`, `CoClustering`
+### Metric
+I am using `RMSE`, which stands for Root Mean Squared Error, to compare the performance of different models. Other available metrics in the `surprise` package were `MAE` and `MSE`. 
 
-## Prediction Function
+### Model Training Process
+I trained all the different available models in the `surprise` library. My process was the following: 
+- for the selected modeltype, tuned the hyperparameters using cross-validation, either with the built-in `cross_validate` method, or `GridSearchCV`;
+- I fit the model with the selected hyperparameters on the train dataset;
+- tested the performance on the test dataset;
+- repeated the process with all the model types. 
+
+#### KNN-Type Models
+
+The three available models in `surprise` are: `kNNBaseline`, `kNNMeans`, `kNNZScore`
+
+#### Models with Matrix Factorisation
+
+`SVD`, `SVDpp`
+
+#### Combination of KNN-Type and Matrix Factorisation
+`kNNBaseline`
+
+#### Misc. Models
+
+for the sake of completeness `SlopeOne`, `CoClustering`
+
+## Prediction Functionality
 Using the `kNNMeans` model. Prediction model is a tradeoff between accuracy and speed, for the final showcase, I opted for this for two reasons: 
 - it's from a memory-based model, meaning we can use the trained model's results and calculate the individual ratings, which is not a possibility with latent-factor models, where you would need to re-train the whole model for an additional user
 - the `rmse` score of this model was relatively close to the best, so a great speed increase came at a cost at a minor decrease in reliability
