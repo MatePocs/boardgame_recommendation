@@ -3,11 +3,11 @@
 ## Summary
 In this project, I collect the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games, and train a colaborative-filtering recommendation system on it. The user enters a few games with their ratings, and the model returns a list of games the user would probably rate high. 
 
-## Technical & Mathematical Keywords
+## Keywords
 BeatifulSoup, Web Scraping, API requests, JSON, Collaborative-Filtering Recommender Systems, Memory-Based Recommenders, Model-Based Recommenders, Scikit-Surprise, 
 
 ## Links
-I wrote a series of blog articles on the topic on Towards Data Science, see the links below: 
+I published a series of articles on the topic in Towards Data Science, see the links below: 
 <br>
 [Part 1 - KNN-Style Recommenders](https://towardsdatascience.com/how-to-build-a-memory-based-recommendation-system-using-python-surprise-55f3257b2cf4)
 <br>
@@ -22,7 +22,7 @@ In addition to that, this project was the basis of my capstone project:
 ## Data
 I obtained the data using a combination of web scraping with `BeautifulSoup` and `API` requests. For each game, I collected all the ratings where the user actually rated the game (as opposed to entries where they just mark the game as owned, or put in a text comment) as of March 31, 2020. Please note that it can take up to an hour to gather information of a game, depending on the number of ratings. 
 
-The complete data contains 2.3m ratings from over 200k users. The average number of games rated by an individual user is about 10. 
+The complete data contains 2.3m ratings from over 200k users. The average number of games rated by an individual user is about 10, meaning the database is about 90% sparse. 
 
 ## Metric
 Using the Root Mean Squared Error, `rmse`, score to compare the different models. 
