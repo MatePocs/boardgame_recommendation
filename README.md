@@ -1,7 +1,7 @@
 # Boardgame Recommendation System
 
 ## Summary
-In this project, I collect the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games, and train a colaborative-filtering recommendation system on it. The user enters a few games with their ratings, and the model returns a list of games the user would probably rate high. 
+In this project, I collect the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games, and train a collaborative-filtering recommendation system on it. The user enters a few games with their ratings, and the model returns a list of games the user would probably rate high. 
 
 ## Keywords
 BeatifulSoup, Web Scraping, API requests, JSON, Collaborative-Filtering Recommender Systems, Memory-Based Recommenders, Model-Based Recommenders, Scikit-Surprise, RMSE Score, K-Nearest Neighbour, KNNBasic, KNNWithMeans, KNNWithZScore, KNNWithBaseline, Cosine Distance, Pearson Distance, Singular Value Decomposition, Matrix Factorisation, SVD++ Model, Stochastic Gradient Descent, Alternating Least Squares, GridSearchCV, Google Cloud Platform
@@ -39,8 +39,8 @@ I am using `RMSE`, which stands for Root Mean Squared Error, to compare the perf
 
 ### Model Training Process
 I trained all the different available models in the `surprise` library. My process was the following: 
-- for the selected modeltype, tuned the hyperparameters using cross-validation, either with the built-in `cross_validate` method, or `GridSearchCV`;
-- I fit the model with the selected hyperparameters on the train dataset;
+- for the selected model type, tuned the hyperparameters using cross-validation, either with the built-in `cross_validate` method, or `GridSearchCV`;
+- I fit the model with the selected hyperparameters on the training dataset;
 - tested the performance on the test dataset;
 - repeated the process with all the model types. 
 
@@ -50,7 +50,7 @@ The three available models in `surprise` are: `KNNBaseline`, `KNNWithMeans`, `KN
 
 ### Models with Matrix Factorisation
 
-In these models, a Singular Value Decomposition method is used to reduce the dimensions to the latent factors. There are two models in the `surprise` library, `SVD` and `SVDpp`. The difference between the two is that `SVDpp` also utlises the information that a user rated a certain item at all. 
+In these models, a Singular Value Decomposition method is used to reduce the dimensions to the latent factors. There are two models in the `surprise` library, `SVD` and `SVDpp`. The difference between the two is that `SVDpp` also utilises the information that a user rated a certain item at all. 
 
 These model runs were very computational-heavy, especially with the `GridSearchCV` calculations, so I set up a Virtual Machine on Google Cloud Platform and ran the calculations there. 
 
