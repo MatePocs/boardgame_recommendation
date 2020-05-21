@@ -24,7 +24,13 @@ I obtained the data using a combination of web scraping with `BeautifulSoup` and
 
 The complete data contains 2.3m ratings from over 200k users. The average number of games rated by an individual user is about 10, meaning the database is about 90% sparse. 
 
+Most of the users have a relatively high average rating: 
+
 ![chart showing number of users per average ratings](./charts/users_by_average_ratings.png)
+
+A large portion of the users rated only one game, and there are users who rated more than 40 (and in fact, there are users who rated all the 100 games). The buckets are arbitrary: 
+
+![chart showing number of users per total number of ratings](./charts/users_by_number_of_ratings.png)
 
 ## Metric
 Using the Root Mean Squared Error, `rmse`, score to compare the different models. 
