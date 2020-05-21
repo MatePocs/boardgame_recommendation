@@ -4,7 +4,7 @@
 In this project, I collect the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games, and train a colaborative-filtering recommendation system on it. The user enters a few games with their ratings, and the model returns a list of games the user would probably rate high. 
 
 ## Keywords
-BeatifulSoup, Web Scraping, API requests, JSON, Collaborative-Filtering Recommender Systems, Memory-Based Recommenders, Model-Based Recommenders, Scikit-Surprise, RMSE Score, K-Nearest Neighbour, KNNBasic, KNNWithMeans, KNNWithZScore Cosine Distance, Pearson Distance, Singular Value Decomposition, Matrix Factorisation, SVD++ model, Alternating Least Squares, GridSearchCV, Google Cloud Platform
+BeatifulSoup, Web Scraping, API requests, JSON, Collaborative-Filtering Recommender Systems, Memory-Based Recommenders, Model-Based Recommenders, Scikit-Surprise, RMSE Score, K-Nearest Neighbour, KNNBasic, KNNWithMeans, KNNWithZScore Cosine Distance, Pearson Distance, Singular Value Decomposition, Matrix Factorisation, SVD++ model, Stochastic Gradient Descent, Alternating Least Squares, GridSearchCV, Google Cloud Platform
 
 ## Links
 I published a series of articles on the topic in Towards Data Science, see the links below: 
@@ -44,20 +44,24 @@ I trained all the different available models in the `surprise` library. My proce
 - tested the performance on the test dataset;
 - repeated the process with all the model types. 
 
-#### KNN-Type Models
+### KNN-Type Models
 
-The three available models in `surprise` are: `kNNBaseline`, `kNNMeans`, `kNNZScore`
+The three available models in `surprise` are: `KNNBaseline`, `KNNWithMeans`, `KNNWithZScore`. They all build on similarity matrices, the difference is that `KNNWithMeans` also takes average ratings into account, while `KNNWithZScores` also modifies with standard deviation. The best performing model was `KNNWithMeans` with `k = 10` and `similarity_option = pearson`, the test `RMSE` score was 1.253.  
 
-#### Models with Matrix Factorisation
+### Models with Matrix Factorisation
 
 `SVD`, `SVDpp`
 
-#### Combination of KNN-Type and Matrix Factorisation
-`kNNBaseline`
+### Combination of KNN-Type and Matrix Factorisation
 
-#### Misc. Models
+The corresponding model in `surprise` is `KNNBaseline`. This class combines the other two groups by first fitting a baseline rating using matrix factorisation techniques, and then tries to explain the remaining variation with a KNN-Type approach. There are two different baseline convergence patterns built in `surprise`: 
+- `SGD` is the Stochastic Gradient Descent where the parameters are tuned every step based on the cost function, 
+- `ALS` is the Alternating Least Squares method, where the two latent factor matrices are determined step by step. In every step, we assume that one of the matrices is fix and optimal, and then tweak the other based on the Least Squares method, which has a closed solution. This process is repeated with the other matrix being assumed optimal. 
+Out of the two methods, `ALS` performed slightly better, `RMSE` score was 1.2456. 
 
-for the sake of completeness `SlopeOne`, `CoClustering`
+### Misc. Models
+
+For the sake of completeness, I trained two other available models in `surprise` library, `SlopeOne` and `CoClustering`, which are quite simplistic approaches, and they did not perform very well compared to the more sophisticated models. 
 
 ## Prediction Functionality
 Using the `kNNMeans` model. Prediction model is a tradeoff between accuracy and speed, for the final showcase, I opted for this for two reasons: 
