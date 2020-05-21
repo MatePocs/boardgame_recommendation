@@ -8,11 +8,15 @@ BeatifulSoup, Web Scraping, API requests, JSON, Collaborative-Filtering Recommen
 
 ## Links
 I wrote a series of blog articles on the topic on Towards Data Science, see the links below: 
+<br>
 [Part 1 - KNN-Style Recommenders](https://towardsdatascience.com/how-to-build-a-memory-based-recommendation-system-using-python-surprise-55f3257b2cf4)
+<br>
 [Part 2 - My Additional Python Code](https://towardsdatascience.com/my-python-code-for-flexible-recommendations-b4d838e9e0e0)
+<br>
 [Part 3 - Matrix Factorisation Recommenders](https://towardsdatascience.com/how-to-build-a-model-based-recommendation-system-using-python-surprise-2df3b77ab3e5)
 
 In addition to that, this project was the basis of my capstone project:
+<br>
 [Presentation](https://docs.google.com/presentation/d/1qKxO2TLHGmGMCSOYO37v1a-bLFWAbEmGfutsNbDwyew/edit#slide=id.p)
 
 ## Data
