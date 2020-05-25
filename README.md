@@ -4,7 +4,7 @@
 In this project, I collect the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games, and train a collaborative-filtering recommendation system on it. The user enters a few games with their ratings, and the model returns a list of games the user would probably rate high. 
 
 ## Keywords
-BeatifulSoup, Web Scraping, API requests, JSON, Collaborative-Filtering Recommender Systems, Memory-Based Recommenders, Model-Based Recommenders, Scikit-Surprise, RMSE Score, K-Nearest Neighbour, KNNBasic, KNNWithMeans, KNNWithZScore, KNNWithBaseline, Cosine Distance, Pearson Distance, Singular Value Decomposition, Matrix Factorisation, SVD++ Model, Stochastic Gradient Descent, Alternating Least Squares, GridSearchCV, Google Cloud Platform
+BeatifulSoup, Web Scraping, API requests, Collaborative-Filtering Recommender Systems, Scikit-Surprise, Cross-Validation, K-Nearest Neighbour, Singular Value Decomposition, Stochastic Gradient Descent, Alternating Least Squares, 
 
 ## Links
 I published a series of articles on the topic in Towards Data Science, see the links below: 
@@ -15,27 +15,27 @@ I published a series of articles on the topic in Towards Data Science, see the l
 <br>
 [Part 3 - Matrix Factorisation Recommenders](https://towardsdatascience.com/how-to-build-a-model-based-recommendation-system-using-python-surprise-2df3b77ab3e5)
 
-In addition to that, this project was the basis of my capstone project:
+This project was the basis of my capstone project at Flatiron School:
 <br>
 [Presentation](https://docs.google.com/presentation/d/1qKxO2TLHGmGMCSOYO37v1a-bLFWAbEmGfutsNbDwyew/edit#slide=id.p)
 
 ## Data
-I obtained the data using a combination of web scraping with `BeautifulSoup` and `API` requests. For each game, I collected all the ratings where the user actually rated the game (as opposed to entries where they just mark the game as owned, or put in a text comment) as of March 31, 2020. Please note that it can take up to an hour to gather information of a game, depending on the number of ratings. 
+I obtained the data using a combination of web scraping with `BeautifulSoup` and `API` requests. For each game, I collected all the ratings where the user actually rated the game (as opposed to entries where they just mark the game as owned, or put in a text comment) as of March 31, 2020. 
 
 The complete data contains 2.3m ratings from over 200k users. The average number of games rated by an individual user is about 10, meaning the database is about 90% sparse. 
 
-Most of the users have a relatively high average rating: 
+Most of the users have a relatively high average rating.  
 
 ![chart showing number of users per average ratings](./charts/users_by_average_ratings.png)
 
-A large portion of the users rated only one game, and there are users who rated more than 40 (and in fact, there are users who rated all the 100 games). The buckets are arbitrary: 
+A large portion of the users rated only one game, and there are users who rated more than 40 (and in fact, there are users who rated all the 100 games).
 
 ![chart showing number of users per total number of ratings](./charts/users_by_number_of_ratings.png)
 
 ## Modelling
 
 ### Metric
-I am using `RMSE`, which stands for Root Mean Squared Error, to compare the performance of different models. Other available metrics in the `surprise` package were `MAE` and `MSE`. 
+I am using `RMSE`, which stands for Root Mean Squared Error, to compare the performance of different models. Other available metrics in the `Surprise` package were `MAE` and `MSE`. 
 
 ### Model Training Process
 I trained all the different available models in the `surprise` library. My process was the following: 
