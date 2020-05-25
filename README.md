@@ -1,10 +1,10 @@
 # Boardgame Recommendation System
 
 ## Summary
-In this project, I collect the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games, and train a collaborative-filtering recommendation system on it. The user enters a few games with their ratings, and the model returns a list of games the user would probably rate high. 
+In this project, I collect the user ratings from [BoardgameGeek](https://boardgamegeek.com/)'s top 100 games and train a collaborative-filtering recommendation system. The user enters a few games with their ratings, and the model returns a list of games the user would probably rate high. 
 
 ## Keywords
-BeatifulSoup, Web Scraping, API requests, Collaborative-Filtering Recommender Systems, Scikit-Surprise, Cross-Validation, K-Nearest Neighbour, Singular Value Decomposition, Stochastic Gradient Descent, Alternating Least Squares, 
+BeatifulSoup, Web Scraping, API requests, Collaborative-Filtering Recommender Systems, Scikit-Surprise, Cross-Validation, K-Nearest Neighbour, Singular Value Decomposition, Stochastic Gradient Descent, Alternating Least Squares 
 
 ## Links
 I published a series of articles on the topic in Towards Data Science, see the links below: 
@@ -35,7 +35,7 @@ A large portion of the users rated only one game, and there are users who rated 
 ## Modelling
 
 ### Metric
-I am using `RMSE`, which stands for Root Mean Squared Error, to compare the performance of different models. Other available metrics in the `Surprise` package were `MAE` and `MSE`. 
+I used `RMSE`, which stands for Root Mean Squared Error, to compare the performance of different models. Other available metrics in the `surprise` library are `MAE` and `MSE`. 
 
 ### Model Training Process
 I trained all the different available models in the `surprise` library. My process was the following: 
@@ -50,7 +50,7 @@ The three available models in `surprise` are: `KNNBaseline`, `KNNWithMeans`, `KN
 
 ### Models with Matrix Factorisation
 
-In these models, a Singular Value Decomposition method is used to reduce the dimensions to the latent factors. There are two models in the `surprise` library, `SVD` and `SVDpp`. The difference between the two is that `SVDpp` also utilises the information that a user rated a certain item at all. 
+In these models, a Singular Value Decomposition method is used to reduce the dimensions to the latent factors. There are two such models in the `surprise` library, `SVD` and `SVDpp`. The difference between the two is that `SVDpp` also utilises the information that a user rated a certain item at all. 
 
 These model runs were very computational-heavy, especially with the `GridSearchCV` calculations, so I set up a Virtual Machine on Google Cloud Platform and ran the calculations there. 
 
@@ -60,7 +60,7 @@ The best performing model was the default `SVD`, with parameters `n_factors= 50`
 
 The corresponding model in `surprise` is `KNNBaseline`. This class combines the other two groups by first fitting a baseline rating using matrix factorisation techniques, and then tries to explain the remaining variation with a KNN-Type approach. There are two different baseline convergence patterns built in `surprise`: 
 
-- `SGD` is the Stochastic Gradient Descent where the parameters are tuned every step based on the cost function, 
+- `SGD` is the Stochastic Gradient Descent where the parameters are tuned every step based on the cost function. 
 - `ALS` is the Alternating Least Squares method, where the two latent factor matrices are determined step by step. In every step, we assume that one of the matrices is fix and optimal, and then tweak the other based on the Least Squares method, which has a closed solution. This process is repeated with the other matrix being assumed optimal. 
 
 Out of the two methods, `ALS` performed slightly better, `RMSE` score was 1.2456. 
